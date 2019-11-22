@@ -35,6 +35,14 @@ let allServices = {
     addUserData: obj => {
         let _sql = 'insert into users set name=?,pass=?,avator=?,moment=?;'
         return allServices.query(_sql, obj)
+    },
+    findAllUser: () => {
+        let _sql = `select * from users`
+        return allServices.query(_sql)
+    },
+    findAllApplication: () => {
+        let _sql = `select * from application`
+        return allServices.query(_sql)
     }
 }
 

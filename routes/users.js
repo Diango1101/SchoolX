@@ -35,4 +35,7 @@ router.post('/add', async (ctx, next) => {
         })
 })
 
+router.get('/AllApplication', async (ctx, next) => {
+    ctx.body = await userService.findAllApplication()
+})
 module.exports = router
