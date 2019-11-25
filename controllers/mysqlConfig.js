@@ -43,6 +43,20 @@ let allServices = {
     findAllApplication: () => {
         let _sql = `select * from application`
         return allServices.query(_sql)
+    },
+    findApplicationById: item_id => {
+        let _sql = `select * from application where item_name='${item_id}'`
+        return allServices.query(_sql)
+    },
+    Is_check: (id, col) => {
+        let _sql = `call Ischeck('${id}','${col}')`
+        console.log(_sql)
+        return allServices.query(_sql)
+    },
+    AddUseNum: (id, col) => {
+        let _sql = `call usenum_add('${id}','${col}')`
+        console.log(_sql)
+        return allServices.query(_sql)
     }
 }
 

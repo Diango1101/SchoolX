@@ -1,15 +1,19 @@
 const router = require('koa-router')()
 const userService = require('../controllers/mysqlConfig')
 
-router.prefix('/users')
-
-//获取所有用户(GET请求)
-router.get('/', async (ctx, next) => {
-    // console.log(ctx.session.username)
-    ctx.body = await userService.findAllUser()
+router.get('/application', async (ctx, next) => {
+    let url = ctx.url
+    let item_id = ''
+    item_id = ctx.request.query['item_id']
+    let query1 = await userService.findApplicationById(item_id)
+    ctx.body = {
+        url,
+        item_id,
+        query1
+    }
 })
 
-// 增加用户(POST请求)
+/*
 router.post('/add', async (ctx, next) => {
     let arr = []
 
@@ -34,24 +38,20 @@ router.post('/add', async (ctx, next) => {
             }
         })
 })
-
+*/
 router.get('/AllApplication', async (ctx, next) => {
-    let id = ctx.query['id']
-    let col = ctx.query['col']
-    await userService.Is_check(id, col).then(data => {
-        ctx.body = { data: true }
+    let res = []
+    let items = []
+    res = await userService.findAllApplication()
+    console.log(res)
+    res.map(item => {
+        items.push({
+            ID: item.APPLICATION_ID,
+            name: item.ITEM_NAME,
+            reason: item.REASON
+        })
     })
+    ctx.body = items
+    console.log('next', next)
 })
 module.exports = router
-router.get('/UseNumAdd', async (ctx, next) => {
-    let id = ctx.query['id']
-    let col = ctx.query['col']
-    await userService
-        .AddUseNum(id, col)
-        .then(() => {
-            ctx.body = { data: true }
-        })
-        .catch(err => {
-            ctx.body = { err: err }
-        })
-})
