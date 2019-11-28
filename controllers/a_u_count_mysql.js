@@ -28,7 +28,7 @@ let allServices = {
         })
     },
     findformData: function(name, col) {
-        let _sql = `select * from CONSUMABLE_NUM_IN_REAL where MECH_ID="${name} and APPLICATION_COL="${col}";`
+        let _sql = `select * from CONSUMABLE_NUM_IN_REAL where MECH_ID="${name}" and APPLICATION_COL="${col}";`
         return allServices.query(_sql)
     },
     addformData: obj => {
