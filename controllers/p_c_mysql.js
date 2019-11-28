@@ -39,6 +39,11 @@ let allServices = {
     findAllData: () => {
         let _sql = `select * from CONSUMABLE_IN_PLAN`
         return allServices.query(_sql)
+    },
+    Is_check: (id, col) => {
+        let _sql = `call Ischeck('${id}','${col}')`
+        console.log(_sql)
+        return allServices.query(_sql)
     }
 }
 

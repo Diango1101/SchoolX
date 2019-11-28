@@ -39,6 +39,11 @@ let allServices = {
     findAllData: () => {
         let _sql = `select * from CONSUMABLE_NUM_IN_REAL`
         return allServices.query(_sql)
+    },
+    AddUseNum: (id, col) => {
+        let _sql = `call usenum_add('${id}','${col}')`
+        console.log(_sql)
+        return allServices.query(_sql)
     }
 }
 

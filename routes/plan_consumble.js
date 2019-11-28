@@ -42,4 +42,17 @@ router.get('/add', async (ctx, next) => {
         })
 })
 
+router.get('/ischeck', async (ctx, next) => {
+    let id = ctx.request.query['id']
+    let col = ctx.request.query['col']
+    await userService
+        .Is_check(id, col)
+        .then(() => {
+            ctx.body = { data: true }
+        })
+        .catch(err => {
+            ctx.body = { err }
+        })
+})
+
 module.exports = router

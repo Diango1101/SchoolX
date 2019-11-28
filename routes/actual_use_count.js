@@ -41,5 +41,18 @@ router.get('/add', async (ctx, next) => {
             }
         })
 })
-
+router.get('/UseNumAdd', async (ctx, next) => {
+    let id = ctx.query['id']
+    let col = ctx.query['col']
+    await userService
+        .AddUseNum(id, col)
+        .then(data => {
+            console.log(data)
+            if (data.affectedRows > 0) ctx.body = { data: true }
+            else ctx.body = { data: false }
+        })
+        .catch(err => {
+            ctx.body = { err }
+        })
+})
 module.exports = router

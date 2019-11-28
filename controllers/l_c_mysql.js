@@ -28,20 +28,20 @@ let allServices = {
         })
     },
     findformData: function(name) {
-        let _sql = `select * from l_course where ROOM_OF_LAB="${name}";`
+        let _sql = `select * from timetable_of_lab where ROOM_OF_LAB="${name}";`
         return allServices.query(_sql)
     },
     addformData: obj => {
         let _sql =
-            'insert into APPLICATION set ROOM_OF_LAB=?,USE_TIME=?,LAB_USER=?;'
+            'insert into timetable_of_lab set ROOM_OF_LAB=?,USE_TIME=?,LAB_USER=?;'
         return allServices.query(_sql, obj)
     },
     findAllData: () => {
-        let _sql = `select * from l_course`
+        let _sql = `select * from timetable_of_lab`
         return allServices.query(_sql)
     },
     DeleteformData: function(name) {
-        let _sql = `delete from l_course where ROOM_OF_LAB="${name}";`
+        let _sql = `delete from timetable_of_lab where ROOM_OF_LAB="${name}";`
         return allServices.query(_sql)
     }
 }
