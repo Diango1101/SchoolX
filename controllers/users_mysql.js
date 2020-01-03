@@ -1,6 +1,6 @@
 //usermysql.js
 var mysql = require('mysql');
-var config = require('./defaultConfig');
+var config = require('../defaultConfig');
 
 var pool = mysql.createPool({
     host: config.database.HOST,
