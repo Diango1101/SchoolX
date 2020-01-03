@@ -33,19 +33,7 @@ router.get('/select', async (ctx, next) => {
 
 router.get('/delete', async (ctx, next) => {
     let lab = ctx.request.query['lab']
-    await userService.DeleteformData(lab).then(data => {
-        let r = ''
-        if (data.affectedRows != 0) {
-            r = 'ok'
-        }
-        ctx.body = {
-            data: r
-        }.catch(() => {
-            ctx.body = {
-                data: 'err'
-            }
-        })
-    })
+    ctx.body = await userService.DeleteformData(lab)
 })
 
 // 增加用户(get请求)
@@ -55,23 +43,9 @@ router.get('/add', async (ctx, next) => {
     arr.push(ctx.request.query['lab'])
     arr.push(ctx.request.query['use_time'])
     arr.push(ctx.request.query['lab_user'])
-
-    await userService
-        .addUserData(arr)
-        .then(data => {
-            let r = ''
-            if (data.affectedRows != 0) {
-                r = 'ok'
-            }
-            ctx.body = {
-                data: r
-            }
-        })
-        .catch(() => {
-            ctx.body = {
-                data: 'err'
-            }
-        })
+    console.log(arr)
+    ctx.body = await userService.addformData(arr)
+    ctx.redirect = '/index.html'
 })
 
 module.exports = router

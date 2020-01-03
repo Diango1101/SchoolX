@@ -37,7 +37,7 @@ let allServices = {
         return allServices.query(_sql, obj)
     },
     findAllData: () => {
-        let _sql = `select * from timetable_of_lab`
+        let _sql = `select * from timetable_of_lab order by USE_TIME`
         return allServices.query(_sql)
     },
     DeleteformData: function(name) {
