@@ -62,7 +62,7 @@ router.get('/UseNumAdd', async (ctx, next) => {
     await userService
         .AddUseNum(id, col)
         .then(data => {
-            console.log(data)
+            console.log(data.affectedRows)
             if (data.affectedRows > 0) ctx.body = { data: true }
             else ctx.body = { data: false }
         })

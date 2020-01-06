@@ -3,16 +3,35 @@ const userService = require('../controllers/p_c_mysql')
 
 router.prefix('/plan_consumble')
 
+function maps(data) {
+    let items = []
+    data.map(item => {
+        console.log(item)
+        items.push({
+            id: item.MECH_ID,
+            col: item.APPLICATION_COL,
+            use_num: item.USE_NUM,
+            check: item.IS_CHECK
+        })
+    })
+    return items
+}
+
 //获取所有用户(GET请求)
 router.get('/', async (ctx, next) => {
     // console.log(ctx.session.username)
-    ctx.body = await userService.findAllData()
+    await userService.findAllData().then(data => {
+        console.log(data)
+        ctx.body = maps(data)
+    })
 })
 
 router.get('/select', async (ctx, next) => {
     let id = ctx.request.query['id']
     let col = ctx.request.query['col']
-    ctx.body = await userService.findformData(id, col)
+    await userService.findformData(id, col).then(data => {
+        ctx.body = maps(data)
+    })
 })
 
 // 增加用户(get请求)

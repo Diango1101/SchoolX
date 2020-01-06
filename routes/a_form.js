@@ -2,14 +2,27 @@ const router = require('koa-router')()
 const userService = require('../controllers/a_formmysql')
 
 router.prefix('/a_form')
+function maps(data) {
+    let items = []
+    data.map(item => {
+        items.push({
+            id: item.APPLICATION_ID,
+            item_name: item.ITEM_NAME,
+            reason: item.REASON
+        })
+    })
+    return items
+}
 
 //获取所有用户(GET请求)
 router.get('/', async (ctx, next) => {
     // console.log(ctx.session.a_form)
     console.log('aaaa')
-    ctx.body = await userService
+    await userService
         .findAllForm()
-        .then(console.log('success'))
+        .then(data => {
+            ctx.body = maps(data)
+        })
         .catch(err => {
             console.log(err)
         })
@@ -19,7 +32,9 @@ router.get('/select', async (ctx, next) => {
     console.log(name)
     ctx.body = await userService
         .findformData(name)
-        .then()
+        .then(data => {
+            ctx.body = maps(data)
+        })
         .catch(err => {
             ctx.body = err
         })
@@ -31,9 +46,10 @@ router.get('/add', async (ctx, next) => {
     arr.push(ctx.request.query['id'])
     arr.push(ctx.request.query['item_name'])
     arr.push(ctx.request.query['reason'])
+    console.log(arr)
 
     await userService
-        .addUserData(arr)
+        .addformData(arr)
         .then(data => {
             let r = ''
             if (data.affectedRows != 0) {

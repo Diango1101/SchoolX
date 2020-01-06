@@ -27,6 +27,7 @@ router.get('/', async (ctx, next) => {
 router.get('/select', async (ctx, next) => {
     let lab = ctx.request.query['lab']
     await userService.findformData(lab).then(data => {
+        console.log(data)
         ctx.body = maps(data)
     })
 })

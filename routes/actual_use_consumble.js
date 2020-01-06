@@ -3,18 +3,36 @@ const userService = require('../controllers/a_u_c_mysql')
 const moment = require('moment')
 router.prefix('/actual_use_consumble')
 
+function maps(data) {
+    let items = []
+    data.map(item => {
+        items.push({
+            id: item.ID,
+            date_of_borrow: item.DATE_OF_BORROW,
+            name: item.NAME,
+            factory: item.FACTORY,
+            warehouse: item.WAREHOUSE,
+            item_user: item.ITEM_USER
+        })
+    })
+    return items
+}
 //获取所有用户(GET请求)
 router.get('/', async (ctx, next) => {
     // console.log(ctx.session.username)
-    ctx.body = await userService.findallDate()
+    let res = await userService.findallDate()
+    res.map(item => {
+        item.DATE_OF_BORROW = moment(item.DATE_OF_BORROW).format('YYYY-MM-DD')
+    })
+    ctx.body = maps(res)
 })
 router.get('/select', async (ctx, next) => {
     let id = ctx.request.query['id']
     let res = await userService.findformData(id)
     res.map(item => {
-        item.DATE_OF_BORROW = moment(item.DATE_OF_BORRO).format('YYYY-MM-DD')
+        item.DATE_OF_BORROW = moment(item.DATE_OF_BORROW).format('YYYY-MM-DD')
     })
-    ctx.body = res
+    ctx.body = maps(res)
 })
 // 增加用户(get请求)
 router.get('/add', async (ctx, next) => {

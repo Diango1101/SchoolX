@@ -35,6 +35,9 @@ let allServices = {
     addformData: obj => {
         let _sql =
             'insert into CONSUMABLE_IN_REAL set ID=?,DATE_OF_BORROW=?,NAME=?,FACTORY=?,WAREHOUSE=?,ITEM_USER=?;'
+        console.log(_sql)
+        console.log(obj)
+
         return allServices.query(_sql, obj)
     },
     findallDate: () => {

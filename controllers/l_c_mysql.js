@@ -34,6 +34,7 @@ let allServices = {
     addformData: obj => {
         let _sql =
             'insert into timetable_of_lab set ROOM_OF_LAB=?,USE_TIME=?,LAB_USER=?;'
+        console.log(_sql)
         return allServices.query(_sql, obj)
     },
     findAllData: () => {

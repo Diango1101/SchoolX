@@ -27,22 +27,12 @@ let allServices = {
             })
         })
     },
-    findformData: function(name, col) {
-        let _sql = `select * from USE_OF_EQU where MECH_ID="${name}" and APPLICATION_COL="${col};`
+    findDataFromPlan: id => {
+        let _sql = `select USE_NUM from consumable_in_plan where mech_id=${id}`
         return allServices.query(_sql)
     },
-    addformData: obj => {
-        let _sql =
-            'insert into USE_OF_EQU set MECH_ID=?,APPLICATION_COL=?,STATUS=?;'
-        console.log(_sql)
-        return allServices.query(_sql, obj)
-    },
-    findAllform: () => {
-        let _sql = `select * from USE_OF_EQU;`
-        return allServices.query(_sql)
-    },
-    findByStatus: status => {
-        let _sql = `select * from USE_OF_EQU where STATUS = ${status}`
+    findDataFromReal: id => {
+        let _sql = `select USENUM from consumable_num_in_real where mech_id=${id}`
         return allServices.query(_sql)
     }
 }

@@ -16,6 +16,7 @@ const f_process = require('./routes/f_process')
 const l_course = require('./routes/l_course')
 const p_factor = require('./routes/p_factor')
 const plan_consumble = require('./routes/plan_consumble')
+const useclick = require('./routes/useclick')
 
 // error handler
 onerror(app)
@@ -56,6 +57,7 @@ app.use(f_process.routes(), f_process.allowedMethods())
 app.use(l_course.routes(), l_course.allowedMethods())
 app.use(p_factor.routes(), p_factor.allowedMethods())
 app.use(plan_consumble.routes(), plan_consumble.allowedMethods())
+app.use(useclick.routes(), useclick.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
